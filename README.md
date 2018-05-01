@@ -18,7 +18,7 @@ The intended audience for this journey are developers who want to learn a method
 
 The pattern also demonstrates an **interactive user interface using D3.js** which allows an user to drill down to get more insights on the artifacts. [D3.js](https://d3js.org/) is a JavaScript library for producing dynamic, interactive data visualizations in web browsers. It makes use of the widely implemented SVG, HTML5, and CSS standards.
 
-![](doc/source/images/architecture.png)
+![](doc/source/images/Architecture final.png)
 
 1. The unstructured text data that need to be analyzed and correlated is extracted from the documents using custom python code.
 2. The text is classified and tagged using the code pattern - [Extend Watson text classification](https://github.com/IBM/watson-document-classifier)
