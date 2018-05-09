@@ -1,0 +1,19 @@
+{
+  "usage": {
+             "text_characters": 502, 
+             "features": 2,
+             "text_units": 1
+  },
+ 
+  "keywords": [{
+      "text": "A",
+      "relevance": 0
+     }],
+     "language": "en",
+  "entities": [{
+    "type": "Person",
+    "text": "Stephen Hawking",
+    "relevance": 0.846941,
+    "count": 5
+   }]
+}
