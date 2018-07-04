@@ -1,0 +1,109 @@
+def get_related_domaincases(reqid):
+    """ Get the related domaincases for a requirements
+    """
+    domaincasesQuery = "select * from ( select expand( out('linkeddomains')) from Requirements where ID = '" + reqid +"' )"
+    domaincases = execute_query(domaincasesQuery)
+    scoresQuery = "select expand(out_linkeddomains) from Requirements where ID = '"+reqid+"'"
+    scores = execute_query(scoresQuery)
+    domaincaseList =[]
+    domaincaseAction =[]
+    scoresList= []
+    for domaincase in domaincases:
+        domaincaseList.append(domaincase.ID)
+        domaincaseAction.append(domaincase.Action)
+    for score in scores:
+        scoresList.append(score.score)
+    result = {}
+    length = len(domaincaseList)
+    for i in range(0, length):
+        result[domaincaseList[i]] = scoresList[i]
+        #result[domaincaseList[i]] = domaincaseAction[i]
+    print(result)
+    return result
+
+def get_related_dataelements(domaincaseid):
+    """ Get the related requirements for a testcase
+    """
+    dataelementsQuery = "select * from ( select expand( out('linkeddataelements') ) from Domains where ID = '" + domaincaseid +"' )"
+    dataelements = execute_query(dataelementsQuery)
+    #print(dataelements)
+    scoresQuery = "select expand(out_linkeddataelements) from Domains where ID = '"+domaincaseid+"'"
+    scores = execute_query(scoresQuery)
+    dataelementsList =[]
+    scoresList= []
+    for dataelement in dataelements:
+        dataelementsList.append(dataelement.ID)
+    for score in scores:
+        scoresList.append(score.score)
+    result = {}
+    length = len(dataelementsList)
+    #print requirementsList, scoresList
+    for i in range(0, length):
+        result[dataelementsList[i]] = scoresList[i]
+    return result
+
+def get_artifacts_mapping_d3_network(reqid):
+    """ Create an artifacts mapping json for display by d3js network widget
+    """
+    nodes =[]
+    links =[] 
+    req = {}
+    req['id'] = reqid
+    req['group'] = 1
+    nodes.append(req)
+    
+    domaincases = get_related_domaincases(reqid)
+    print("1 - nodes")
+    print(nodes)
+    print("2 - domaincases")
+    print(domaincases)
+    for key in domaincases:
+        print("3  - For each domaincases")
+        print(key)
+        domaincase ={}
+        domaincaseid = key
+        domaincase['id'] = domaincaseid
+        domaincase['group'] = 2
+        if domaincase not in nodes:
+            nodes.append(domaincase)
+        print("4 - appended node")
+        print(nodes)
+        link = {}
+        link['source'] = reqid
+        link['target']=domaincaseid
+        link['value']=domaincases[domaincaseid]
+        links.append(link)
+        print("5 - create links for individual domaincase")
+        print(links)
+        dataelements = get_related_dataelements(key)
+        print("6 - for the domain case find dataelements")
+        print(dataelements)
+        for key in dataelements:
+            print("7- individual dataelements")
+            print(key)
+            dataelement ={}
+            dataelement['id'] = key
+            dataelement['group'] = 3
+            if dataelement not in nodes:
+                nodes.append(dataelement)
+            print("8 - appended node with dataelement")
+            print(nodes)
+            link = {}
+            link['source'] = domaincaseid
+            link['target'] = key
+            link['value'] = dataelements[key]
+            links.append(link)
+            print("9- create links for dataelements")
+            print(links)
+    result ={}
+    result["nodes"] = nodes
+    result["links"] = links
+    return result
+
+
+req_id = "R01"
+wsresponse = {}
+wsresponse["forCmd"] = "AllRelation" 
+wsresponse["response"] = get_artifacts_mapping_d3_network(req_id)
+print("***** final response ******")
+print(json.dumps(wsresponse))
