@@ -1,6 +1,6 @@
 <?php
-$access_key         = "AKIAJP3IJN2XECN4YV5A"; //Access Key
-$secret_key         = "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"; //Secret Key
+$access_key         = "A**A"; //Access Key
+$secret_key         = "***"; //Secret Key
 $my_bucket          = "banking-brd-bucket"; //bucket name
 $region             = "ap-south-1"; //bucket region
 $success_redirect   = 'https://s3.ap-south-1.amazonaws.com/static-webpageforfileupload/index.html'; //URL to which the client is redirected upon success (currently self) 
