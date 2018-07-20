@@ -1,5 +1,4 @@
 # Engineering Insights - A composite pattern. 
-The idea has reference to the already implemented IBM project to Gain Engineering insight to unstructured data which was done using IBM Watson. Here we will be using the open source tool for the same.
 
 The problem that we address in this pattern is in the domain of software development lifecycle. In the software development lifecycle, there is a requirement to optimize project delivery lifecycle by aplication of Machine Learning. The idea is to Develop a conceptual document detailing the role of “Machine Learning” in optimizing the Design phase of project delivery.  Starting from BRD document till creation of use cases, system components etc. In long running software projects with minimal tool support and a churn of team members, the new team members face many questions: 
 - What requirement does this Use case correlate to?
@@ -36,13 +35,10 @@ The idea is to use an **interactive user interface using D3.js** which allows an
 
 * [OrientDB](http://orientdb.com/orientdb/): A Multi-Model Open Source NoSQL DBMS.
 
-* [Kubernetes Clusters](https://console.bluemix.net/containers-kubernetes/launch): an open-source system for automating deployment, scaling, and management of containerized applications.
+
 
 ## Featured technologies
 
-
-# Watch the Video
-[![](http://img.youtube.com/vi/O4_eAFaYanY/0.jpg)](https://youtu.be/O4_eAFaYanY) 
 
 
 # PROCESS FOR TEXT CORRELATION :
