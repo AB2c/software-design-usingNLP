@@ -1,0 +1,88 @@
+{
+  "configuration": {
+    "classification": {
+      "stages": [
+        {
+          "name": "Base Tagging",
+          "steps": [
+            {
+              "type": "keywords",
+              "keywords": [
+                {
+                  "tag": "User",
+                  "text": "Customer"
+                },
+                {
+                  "tag": "User",
+                  "text": "Banker"
+                }
+              ]
+            },
+            {
+              "type": "d_regex",
+              "d_regex": [
+                {
+                  "tag": "Date",
+                  "pattern": "(\\d+/\\d+/\\d+)"
+                }
+              ]
+            },
+            {
+              "type": "d_regex",
+              "d_regex": [
+                {
+                  "tag": "Email",
+                  "pattern": "\\b[\\w.-]+?@\\w+?\\.\\w+?\\b"
+                }
+              ]
+            },
+            {
+              "type": "d_regex",
+              "d_regex": [
+                {
+                  "tag": "PhoneNumber",
+                  "pattern": "[0-9]{10}"
+                }
+              ]
+            },
+            {
+              "type": "chunking",
+              "chunk": [
+                {
+                  "tag": "Action",
+                  "pattern": "Action:{<VB.?><NN.?>+}"
+                },
+                {
+                  "tag": "Action",
+                  "pattern": "Action:{<VB.?><DT|PRP.?|IN|JJ><NN.?>+}"
+                },
+                {
+                  "tag": "Action",
+                  "pattern": "Action:{<VB.?><DT|PRP.?|IN|JJ><DT|PRP.?|IN|JJ><NN.?>+}"
+                },
+                {
+                  "tag": "Action",
+                  "pattern": "Action:{<VB.?><DT|PRP.?|IN|JJ><DT|PRP.?|IN|JJ><DT|PRP.?|IN|JJ><NN.?>+}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Domain Tagging",
+          "steps": [
+            {
+              "type": "d_regex",
+              "d_regex": [
+                {
+                  "tag": "Year",
+                  "pattern": "[0-9]{4}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
